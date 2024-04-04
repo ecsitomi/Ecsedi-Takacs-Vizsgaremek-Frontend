@@ -7,6 +7,7 @@ import UserPage from './pages/UserPage'
 
 function App() {
 
+  //útválasztó létrehozása
   const router = createBrowserRouter([
     { path: '/', element: <Layout />, children: [
         { path: 'login', element: <LoginPage /> },
@@ -16,6 +17,7 @@ function App() {
   ]);
   
   return (
+    //útválasztó megjelenítése
     <RouterProvider router={router} />
   );
 }
