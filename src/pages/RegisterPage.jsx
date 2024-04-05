@@ -1,5 +1,6 @@
 import '../App.css'
 import { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 //Regisztrációs oldal
 function RegisterPage() {
@@ -7,6 +8,7 @@ function RegisterPage() {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const nameRef = useRef(null);
+  const navigate = useNavigate();
 
   //Regisztrációs logika
   const register = async (userReg) => {
@@ -24,6 +26,7 @@ function RegisterPage() {
     console.log(data);
     if (response.ok) {
       alert("Sikeres regiszráció!");
+      navigate("/login");
     } else {
       alert(data.message);
     }

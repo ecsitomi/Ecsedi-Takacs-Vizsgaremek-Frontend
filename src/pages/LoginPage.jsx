@@ -1,11 +1,14 @@
 import '../App.css';
 import { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 //Bejelentkezés oldal
 function LoginPage() { 
   const apiUrl = "http://localhost:8000/api";
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
+  const navigate = useNavigate();
+  
 
   //Bejelentkezés logika
   const login = async (formData) => {
@@ -24,6 +27,7 @@ function LoginPage() {
     console.log(data);
     if (response.ok) {
       localStorage.setItem("token", data.token);
+      navigate("/user");
     } else {
       alert(data.message);
     }

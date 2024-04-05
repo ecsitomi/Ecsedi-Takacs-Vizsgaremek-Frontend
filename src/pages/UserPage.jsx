@@ -1,9 +1,11 @@
 import '../App.css'
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function UserPage() {
   const apiUrl = "http://localhost:8000/api";
   const [user, setUser] = useState(null); //user állapotában tároljuk a tokent
+  const navigate = useNavigate();
 
   //Felhasználó adatainak letöltése
   const loadUserData = async () => {
@@ -49,6 +51,7 @@ function UserPage() {
     //Válasz
     if (response.ok) {
       localStorage.removeItem("token");
+      navigate("/login");
     } else {
       const data = await response.json();
       alert(data.message);
@@ -69,6 +72,7 @@ function UserPage() {
     //Válasz
     if (response.ok) {
       localStorage.removeItem("token");
+      navigate("/login");
     } else {
       const data = await response.json();
       alert(data.message);
@@ -83,7 +87,7 @@ function UserPage() {
       <button type="button" onClick={() => logoutEverywhere()}>Kijelentkezés mindenhonnan</button>
     </div>
   ) : (
-    <p>Nincs bejelentkezve senki!</p>
+    <h2>Adatok betöltése...</h2>
   );
 }
 
