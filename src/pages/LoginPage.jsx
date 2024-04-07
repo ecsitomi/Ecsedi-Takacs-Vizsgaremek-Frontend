@@ -1,9 +1,11 @@
 import '../App.css';
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types'
 
 //Bejelentkezés oldal
-function LoginPage() { 
+function LoginPage(props) { 
+  const { tokenFrissites } = props;
   const apiUrl = "http://localhost:8000/api";
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
@@ -27,6 +29,7 @@ function LoginPage() {
     console.log(data);
     if (response.ok) {
       localStorage.setItem("token", data.token);
+      tokenFrissites();
       navigate("/user");
     } else {
       alert(data.message);
@@ -45,18 +48,23 @@ function LoginPage() {
 
   //Űrlap megjelenítése
   return (
-    <form onSubmit={handleFormSubmit}>
-      <div>
-        <label htmlFor="loginEmail">E-mail:</label>
-        <input type="email" id="loginEmail" placeholder="E-mail" ref={emailRef} />
+    <form style={{ marginTop: "5px"}} onSubmit={handleFormSubmit}>
+      <h2 className='mb-3'>Bejelentkezés</h2>
+      <div className='mb-3'>
+        <label className='form-label' htmlFor="loginEmail">E-mail:</label>
+        <input className='form-control' type="email" id="loginEmail" placeholder="E-mail" ref={emailRef} />
       </div>
-      <div>
-        <label htmlFor="loginPassword">Jelszó</label>
-        <input type="password" id="loginPassword" placeholder="Jelszó" ref={passwordRef} />
+      <div className='mb-3'>
+        <label className='form-label' htmlFor="loginPassword">Jelszó</label>
+        <input className='form-control' type="password" id="loginPassword" placeholder="Jelszó" ref={passwordRef} />
       </div>
-      <button type="submit">Bejelentkezés</button>
+      <button className="btn btn-primary" type="submit">Bejelentkezés</button>
     </form>
   );
 }
+
+LoginPage.propTypes = {
+  tokenFrissites: PropTypes.func.isRequired,
+};
 
 export default LoginPage

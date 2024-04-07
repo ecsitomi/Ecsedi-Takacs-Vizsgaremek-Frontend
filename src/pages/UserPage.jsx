@@ -1,8 +1,10 @@
 import '../App.css'
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-function UserPage() {
+function UserPage(props) {
+  const { tokenFrissites } = props;
   const apiUrl = "http://localhost:8000/api";
   const [user, setUser] = useState(null); //user állapotában tároljuk a tokent
   const navigate = useNavigate();
@@ -24,6 +26,7 @@ function UserPage() {
       setUser(data);
     } else {
       localStorage.removeItem("token");
+      navigate("/login");
     }
   };
 
@@ -32,8 +35,10 @@ function UserPage() {
     const token = localStorage.getItem("token");
     if (token) {
       loadUserData();
+      tokenFrissites();
     } else {
       setUser(null);
+      navigate("/login");
     }
   }, []);
 
@@ -51,6 +56,7 @@ function UserPage() {
     //Válasz
     if (response.ok) {
       localStorage.removeItem("token");
+      tokenFrissites();
       navigate("/login");
     } else {
       const data = await response.json();
@@ -72,6 +78,7 @@ function UserPage() {
     //Válasz
     if (response.ok) {
       localStorage.removeItem("token");
+      tokenFrissites();
       navigate("/login");
     } else {
       const data = await response.json();
@@ -82,13 +89,20 @@ function UserPage() {
   //Megjelenítés
   return user ? (
     <div>
-      <p>Bejelentkezve: {user.name}</p>
-      <button type="button" onClick={() => logout()}>Kijelentkezés</button>
-      <button type="button" onClick={() => logoutEverywhere()}>Kijelentkezés mindenhonnan</button>
+      <h2>Profil</h2>
+      <h4>Bejelentkezve: {user.name}</h4>
+      <div className='d-grid gap-2'>
+        <button className="btn btn-primary" type="button" onClick={() => logout()}>Kijelentkezés</button>
+        <button className="btn btn-primary" type="button" onClick={() => logoutEverywhere()}>Kijelentkezés mindenhonnan</button>
+      </div>
     </div>
   ) : (
     <h2>Adatok betöltése...</h2>
   );
 }
+
+UserPage.propTypes = {
+  tokenFrissites: PropTypes.func.isRequired,
+};
 
 export default UserPage

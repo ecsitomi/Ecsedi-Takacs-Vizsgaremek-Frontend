@@ -1,9 +1,11 @@
 import '../App.css'
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 //Regisztrációs oldal
-function RegisterPage() {
+function RegisterPage(props) {
+  const { tokenFrissites } = props;
   const apiUrl = "http://localhost:8000/api";
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
@@ -26,6 +28,7 @@ function RegisterPage() {
     console.log(data);
     if (response.ok) {
       alert("Sikeres regiszráció!");
+      tokenFrissites();
       navigate("/login");
     } else {
       alert(data.message);
@@ -46,21 +49,26 @@ function RegisterPage() {
   //Űrlap megjelenítése
   return (
     <form onSubmit={handleFormSubmit}>
-      <div>
-        <label htmlFor="name">Teljes név</label>
-        <input type="text" id="name" placeholder="Teljes név" ref={nameRef} />
+      <h2>Regisztráció</h2>
+      <div className='mb-3'>
+        <label className='form-label' htmlFor="name">Teljes név</label>
+        <input className='form-control' type="text" id="name" placeholder="Teljes név" ref={nameRef} />
       </div>
-      <div>
-        <label htmlFor="email">E-mail:</label>
-        <input type="email" id="email" placeholder="E-mail" ref={emailRef} />
+      <div className='mb-3'>
+        <label className='form-label' htmlFor="email">E-mail:</label>
+        <input className='form-control' type="email" id="email" placeholder="E-mail" ref={emailRef} />
       </div>
-      <div>
-        <label htmlFor="password">Jelszó</label>
-        <input type="password" id="password" placeholder="Jelszó" ref={passwordRef} />
+      <div className='mb-3'>
+        <label className='form-label' htmlFor="password">Jelszó</label>
+        <input className='form-control' type="password" id="password" placeholder="Jelszó" ref={passwordRef} />
       </div>
-      <button type="submit">Regisztráció</button>
+      <button className="btn btn-primary" type="submit">Regisztráció</button>
     </form>
   );
 }
+
+RegisterPage.propTypes = {
+  tokenFrissites: PropTypes.func.isRequired,
+};
 
 export default RegisterPage
