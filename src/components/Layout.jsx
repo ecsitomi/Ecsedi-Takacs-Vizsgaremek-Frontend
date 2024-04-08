@@ -8,6 +8,7 @@ function Layout(props) {
     const navbarRight = [];
     navbarLeft.push({ to: '/', text: 'Főoldal' });
     if (token) {
+        navbarLeft.push({ to: '/all-tickets', text: 'Összes bejelentés' });
         navbarRight.push({ to: '/user', text: 'Saját profil' });
     } else {
         navbarRight.push({ to: '/register', text: 'Regisztráció' });
