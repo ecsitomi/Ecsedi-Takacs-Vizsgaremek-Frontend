@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-function MyTicket(props) {
+function AllTicket(props) {
     const { tokenFrissites } = props;
     const apiUrl = "http://localhost:8000/api";
     const navigate = useNavigate();
@@ -79,8 +79,8 @@ function MyTicket(props) {
     );    
 };
 
-MyTicket.propTypes = {
+AllTicket.propTypes = {
     tokenFrissites: PropTypes.func.isRequired,
 };
 
-export default MyTicket;
+export default AllTicket;

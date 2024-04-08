@@ -10,6 +10,7 @@ import HomePage from './pages/HomePage';
 import { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import IndexAll from './pages/IndexAll'
+import IndexAllUser from './pages/IndexAllUser'
 
 function App() {
   //token állapot ellenőrzése
@@ -32,6 +33,7 @@ function App() {
         { path: 'register', element: <RegisterPage tokenFrissites={tokenFrissites}/> },
         { path: 'user', element: <UserPage tokenFrissites={tokenFrissites}/> },
         { path: 'all-tickets', element: <IndexAll tokenFrissites={tokenFrissites}/> },
+        { path: 'all-users', element: <IndexAllUser tokenFrissites={tokenFrissites}/> }
       ]},
   ]);
   
@@ -51,6 +53,9 @@ UserPage.propTypes = {
   tokenFrissites: PropTypes.func.isRequired,
 };
 IndexAll.propTypes = {
+  tokenFrissites: PropTypes.func.isRequired,
+};
+IndexAllUser.propTypes = {
   tokenFrissites: PropTypes.func.isRequired,
 };
 
