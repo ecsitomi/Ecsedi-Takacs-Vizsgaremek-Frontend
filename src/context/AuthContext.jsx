@@ -124,7 +124,9 @@ export function AuthProvider(props) { //ami appban authprivider kontextusba van 
                     console.error(data);
                 }
             },
-                register: async () => { },
+                //register: async (email, password, name) => { // },
+                //a regisztráció kezelése a RegisterPage.jsx-ben van
+                //a token ellenőrzés ott történik
     };
 
 return <AuthContext.Provider value={authObj}>

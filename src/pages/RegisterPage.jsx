@@ -2,15 +2,23 @@ import '../App.css'
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
 
 //Regisztrációs oldal
 function RegisterPage(props) {
+  const navigate = useNavigate();
+  //Ha be vagyunk jelentkezve akkor nem jelenik meg a regisztrációs oldal
+  const authContext = useContext(AuthContext);
+  if (authContext.authToken) {
+    navigate("/user");
+  }
+  //Ha nincs bejelentkezve senki akkor lehet regisztrálni is
   const { tokenFrissites } = props;
   const apiUrl = "http://localhost:8000/api";
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const nameRef = useRef(null);
-  const navigate = useNavigate();
 
   //Regisztrációs logika
   const register = async (userReg) => {
@@ -34,7 +42,7 @@ function RegisterPage(props) {
       alert(data.message);
     }
   };
-  
+
   //Eseménykezelő
   const handleFormSubmit = (event) => {
     event.preventDefault(); //ne frissítse az oldalt
