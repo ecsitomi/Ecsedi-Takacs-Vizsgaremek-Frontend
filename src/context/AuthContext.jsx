@@ -2,10 +2,10 @@ import { createContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 //Egy kontextus létrehozása AuthProvider néven, ami vizsgálja ki van bejelentkezve
-//így megszűnik a folyamatos "adatok betöltése" a profil oldalon
-export const AuthContext = createContext();
+//így megszűnik a folyamatos "adatok betöltése" a profil oldalon stb
+export const AuthContext = createContext(); 
 
-export function AuthProvider(props) {
+export function AuthProvider(props) { //ami appban authprivider kontextusba van rakva, arra érvényer
     const apiUrl = "http://localhost:8000/api";
     const { children } = props; //lehetséges gyerek komponensek
     const [authToken, setAuthToken] = useState(null); //authToken állapotának létrehozása
@@ -13,9 +13,9 @@ export function AuthProvider(props) {
     const [error, setError] = useState(null); //hibaüzenet létrehozása
 
     useEffect(() => { //betöltéskor lekéri a tokent és elmenti kontextusba
-        const toke = localStorage.getItem("token");
-        if (toke) {
-            setAuthToken(toke);
+        const token = localStorage.getItem("token");
+        if (token) {
+            setAuthToken(token);
         }
     }, []);
 
@@ -55,14 +55,40 @@ export function AuthProvider(props) {
         error: error,
 
         //utakon mi történjen, user oldalról hoztuk át a funkciókat
-        login: async () => { },
+        login: async (email, password) => {
+            const url = apiUrl + "/login";
+            const formData = { //DTO, data transfer object, (mint Laravelben a Request)
+                email: email,
+                password: password,
+            };
+            const response = await fetch(url, {
+                method: "POST",
+                body: JSON.stringify(formData),
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                },
+            });
+            //Válasz
+            const data = await response.json();
+            console.log(data);
+            if (response.ok) {
+                const token = data.token;
+                localStorage.setItem("token", token);
+                setAuthToken(token);
+                navigate("/user");
+            } else {
+                setError(data.message);
+                console.error(data);
+            }
+    },
         logout: async () => {
             const url = apiUrl + "/logout";
             const response = await fetch(url, {
                 method: "POST",
                 headers: {
                     Accept: "application/json",
-                    Authorization: "Bearer " + token,
+                    Authorization: "Bearer " + authToken,
                 },
             });
             //Válasz
@@ -70,35 +96,35 @@ export function AuthProvider(props) {
                 localStorage.removeItem("token");
                 setAuthToken(null);
                 //tokenFrissites();
-                //navigate("/login");
+                navigate("/login");
             } else {
                 const data = await response.json();
                 setError(data);
                 console.error(data);
             }
         },
-        logoutEverywhere: async () => { 
-            const url = apiUrl + "/logout-everywhere";
-            const response = await fetch(url, {
-                method: "POST",
-                headers: {
-                    Accept: "application/json",
-                    Authorization: "Bearer " + token,
-                },
-            });
-            //Válasz
-            if (response.ok || response.status === 401) {
-                localStorage.removeItem("token");
-                setAuthToken(null);
-                //tokenFrissites();
-                //navigate("/login");
-            } else {
-                const data = await response.json();
-                setError(data);
-                console.error(data);
-            }
-        },
-            register: async () => { },
+            logoutEverywhere: async () => {
+                const url = apiUrl + "/logout-everywhere";
+                const response = await fetch(url, {
+                    method: "POST",
+                    headers: {
+                        Accept: "application/json",
+                        Authorization: "Bearer " + authToken,
+                    },
+                });
+                //Válasz
+                if (response.ok || response.status === 401) {
+                    localStorage.removeItem("token");
+                    setAuthToken(null);
+                    //tokenFrissites();
+                    navigate("/login");
+                } else {
+                    const data = await response.json();
+                    setError(data);
+                    console.error(data);
+                }
+            },
+                register: async () => { },
     };
 
 return <AuthContext.Provider value={authObj}>
