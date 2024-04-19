@@ -1,15 +1,21 @@
 import '../App.css'
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { AuthContext } from '../context/AuthContext';
+//import PropTypes from 'prop-types'; Kontextus miatt nem kell
 
-function UserPage(props) {
-  const { tokenFrissites } = props;
-  const apiUrl = "http://localhost:8000/api";
-  const [user, setUser] = useState(null); //user állapotában tároljuk a tokent
+function UserPage() {
+  //KONTEXTUSBÓL KÉRJÜK LE
+  //const { tokenFrissites } = props;
+  //const apiUrl = "http://localhost:8000/api";
+  // const [user, setUser] = useState(null); //user állapotában tároljuk a tokent, 
   const navigate = useNavigate();
+  const authContext = useContext(AuthContext);
+  //console.log(authContext);
+  const { user, authToken, logout, logoutEverywhere } = authContext;
 
   //Felhasználó adatainak letöltése
+  /* ÁTKERÜLT az AuthContext.jsx-be
   const loadUserData = async () => {
     const token = localStorage.getItem("token");
     const url = apiUrl + "/user";
@@ -29,22 +35,25 @@ function UserPage(props) {
       navigate("/login");
     }
   };
+  */
 
   //Van-e bejelentkezett felhasználó? Ha igen, akkor betölti az adatait az oldal indulásakor
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      loadUserData();
-      tokenFrissites();
+    //const token = localStorage.getItem("token"); KONTEXTUSBÓL KÉRJÜK LE
+    if (authToken) {
+      //loadUserData();
+      //tokenFrissites();
     } else {
-      setUser(null);
+      //setUser(null);
       navigate("/login");
     }
-  }, []);
+  }, [authToken, navigate]);
 
   //Kijelentkezés erről az eszközről
+  //ÁTKERÜLT az AuthContext.jsx-be
+  /*
   const logout = async () => {
-    const token = localStorage.getItem("token");
+    //const token = localStorage.getItem("token"); KONTEXTUSBÓL KÉRJÜK LE
     const url = apiUrl + "/logout";
     const response = await fetch(url, {
       method: "POST",
@@ -63,10 +72,13 @@ function UserPage(props) {
       alert(data.message);
     }
   };
+  */
 
   //Kijelentkezés minden eszközről
+  //ÁTKERÜLT az AuthContext.jsx-be
+  /*
   const logoutEverywhere = async () => {
-    const token = localStorage.getItem("token");
+    //const token = localStorage.getItem("token"); KONTEXTUSBÓL KÉRJÜK LE
     const url = apiUrl + "/logout-everywhere";
     const response = await fetch(url, {
       method: "POST",
@@ -85,6 +97,7 @@ function UserPage(props) {
       alert(data.message);
     }
   };
+  */
 
   //Megjelenítés
   return user ? (
@@ -101,8 +114,11 @@ function UserPage(props) {
   );
 }
 
+//context miatt nem kell prop
+/*
 UserPage.propTypes = {
   tokenFrissites: PropTypes.func.isRequired,
 };
+*/
 
 export default UserPage

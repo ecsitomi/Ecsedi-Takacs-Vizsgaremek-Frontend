@@ -57,7 +57,7 @@ function AllTicket(props) {
                 <>
                     <h2>Összes Bejelentés</h2>
                     {bejelentesek.length === 0 ? (
-                        <p>Még nincs beküldött bejelentés.</p>
+                        <p>Adatok betöltése...</p>
                     ) : (
                         <div className='row'>
                             {bejelentesek.map((bejelentes) => (

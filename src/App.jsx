@@ -12,6 +12,7 @@ import { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import IndexAll from './pages/IndexAll'
 import IndexAllUser from './pages/IndexAllUser'
+import { AuthProvider } from './context/AuthContext';
 
 function App() {
   //token állapot ellenőrzése
@@ -39,8 +40,10 @@ function App() {
   ]);
   
   return (
-    //útválasztó megjelenítése
-    <RouterProvider router={router} />
+    //útválasztó megjelenítése AuthProvider komponenssel
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   );
 }
 

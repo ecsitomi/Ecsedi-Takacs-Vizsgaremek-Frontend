@@ -6,14 +6,6 @@ h1, h2 {
     padding-top: 30px;
 }
 
-/*
-video {
-    max-width: 100%;
-    height: auto;
-  }
-*/
-
-/* App.css */
 .fullscreen-video {
     position: fixed;
     top: 0;

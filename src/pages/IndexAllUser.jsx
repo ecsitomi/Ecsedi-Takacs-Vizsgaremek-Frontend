@@ -47,7 +47,7 @@ function AllUsers(props) {
                 <>
                     <h2>Összes Felhasznaló</h2>
                     {felhasznalok.length === 0 ? (
-                        <p>Még nincs regisztrált felhasználó.</p>
+                        <p>Adatok betöltése...</p>
                     ) : (
                         <table className='table table-striped'>
                             <thead>
