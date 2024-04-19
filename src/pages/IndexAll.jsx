@@ -1,17 +1,20 @@
 import '../App.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { AuthContext } from '../context/AuthContext';
+//import PropTypes from 'prop-types';
 
-function AllTicket(props) {
-    const { tokenFrissites } = props;
+function AllTicket() {
+    //const { tokenFrissites } = props;
+    const authContext = useContext(AuthContext);
+    const { authToken } = authContext;
     const apiUrl = "http://localhost:8000/api";
     const navigate = useNavigate();
     const [bejelentesek, setBejelentesek] = useState([]); //bejelentések állapotának létrehozása
 
     const loadBejelentesek = async () => {
-        const token = localStorage.getItem("token");
-        if (!token) {
+        //const token = localStorage.getItem("token");
+        if (!authToken) {
             navigate("/login");
             return;
         }
@@ -20,7 +23,7 @@ function AllTicket(props) {
             const response = await fetch(apiUrl + "/indexAll", {
                 method: "GET",
                 headers: {
-                    Authorization: "Bearer " + token,
+                    Authorization: "Bearer " + authToken,
                 },
             });
 
@@ -38,8 +41,8 @@ function AllTicket(props) {
 
     useEffect(() => {
         loadBejelentesek();
-        tokenFrissites();
-    }, [tokenFrissites]);
+        //tokenFrissites();
+    }, []);
 
     // Háttérszín classzok definiálása a különböző hiba állapotokhoz
     const getBackgroundColor = (hibaAllapota) => {
@@ -79,8 +82,10 @@ function AllTicket(props) {
     );    
 };
 
+/*
 AllTicket.propTypes = {
     tokenFrissites: PropTypes.func.isRequired,
 };
+*/
 
 export default AllTicket;

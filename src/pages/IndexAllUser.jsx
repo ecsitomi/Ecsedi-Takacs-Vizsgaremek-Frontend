@@ -1,17 +1,20 @@
 import '../App.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { AuthContext } from '../context/AuthContext';
+//import PropTypes from 'prop-types';
 
-function AllUsers(props) {
-    const { tokenFrissites } = props;
+function AllUsers() {
+    //const { tokenFrissites } = props;
+    const authContext = useContext(AuthContext);
+    const { authToken } = authContext;
     const apiUrl = "http://localhost:8000/api";
     const navigate = useNavigate();
     const [felhasznalok, setFelhasznalok] = useState([]);
 
     const loadFelhasznalok = async () => {
-        const token = localStorage.getItem("token");
-        if (!token) {
+        //const token = localStorage.getItem("token");
+        if (!authToken) {
             navigate("/login");
             return;
         }
@@ -20,7 +23,7 @@ function AllUsers(props) {
             const response = await fetch(apiUrl + "/indexAllUser", {
                 method: "GET",
                 headers: {
-                    Authorization: "Bearer " + token,
+                    Authorization: "Bearer " + authToken,
                 },
             });
 
@@ -38,8 +41,8 @@ function AllUsers(props) {
 
     useEffect(() => {
         loadFelhasznalok();
-        tokenFrissites();
-    }, [tokenFrissites]);
+        //tokenFrissites();
+    }, []);
     
     return (
         <div>
@@ -74,8 +77,10 @@ function AllUsers(props) {
     );    
 };
 
+/*
 AllUsers.propTypes = {
     tokenFrissites: PropTypes.func.isRequired,
 };
+*/
 
 export default AllUsers;
