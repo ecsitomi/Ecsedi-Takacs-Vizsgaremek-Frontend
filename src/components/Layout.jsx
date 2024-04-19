@@ -1,13 +1,16 @@
 import Navbar from './Navbar';
 import { Outlet } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
+//import PropTypes from 'prop-types';
 
-function Layout(props) {
-    const { token } = props;
+function Layout() {
+    const authContext = useContext(AuthContext);
+    const { authToken } = authContext;
     const navbarLeft = [];
     const navbarRight = [];
     navbarLeft.push({ to: '/', text: 'Főoldal' });
-    if (token) {
+    if (authToken) {
         navbarLeft.push({ to: '/all-tickets', text: 'Összes bejelentés' });
         navbarLeft.push({ to: '/all-users', text: 'Összes felhasználó' });
         navbarRight.push({ to: '/user', text: 'Saját profil' });
@@ -26,8 +29,10 @@ function Layout(props) {
     );
 }
 
+/*
 Layout.propTypes = {
     token: PropTypes.string,
 };
+*/
 
 export default Layout;
