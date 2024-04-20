@@ -13,6 +13,7 @@ import PropTypes from 'prop-types'
 import IndexAll from './pages/IndexAll'
 import IndexAllUser from './pages/IndexAllUser'
 import { AuthProvider } from './context/AuthContext';
+import CreateTicketPage from './pages/CreateTicketPage';
 //import { useState, useEffect } from 'react'
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
     tokenFrissites();
   }, []);
   */
+
   //útválasztó létrehozása
   const router = createBrowserRouter([
     { path: '/', element: <Layout />, 
@@ -37,7 +39,8 @@ function App() {
         { path: 'register', element: <RegisterPage tokenFrissites={tokenFrissites}/> },
         { path: 'user', element: <UserPage /> },
         { path: 'all-tickets', element: <IndexAll /> },
-        { path: 'all-users', element: <IndexAllUser /> }
+        { path: 'all-users', element: <IndexAllUser /> },
+        { path: 'create-ticket', element: <CreateTicketPage /> },
       ]},
   ]);
   

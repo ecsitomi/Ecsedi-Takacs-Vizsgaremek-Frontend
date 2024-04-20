@@ -30,7 +30,7 @@ function LoginPage() {
   
   //Űrlap megjelenítése
   return (
-    <form style={{ marginTop: "5px" }} onSubmit={handleFormSubmit}>
+    <form onSubmit={handleFormSubmit}>
       <h2 className='mb-3'>Bejelentkezés</h2>
       <div className='mb-3'>
         <label className='form-label' htmlFor="loginEmail">E-mail:</label>

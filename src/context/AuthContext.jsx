@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from "react";
+import { navigate } from "react";
 import PropTypes from "prop-types";
 
 //Egy kontextus létrehozása AuthProvider néven, ami vizsgálja ki van bejelentkezve
