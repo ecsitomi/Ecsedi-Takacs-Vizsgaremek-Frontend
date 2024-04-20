@@ -49,7 +49,7 @@ function AllUsers() {
             {felhasznalok ? (
                 <>
                     <h2>Összes Felhasznaló</h2>
-                    {felhasznalok.length === 0 ? (
+                    {felhasznalok.length == 0 ? (
                         <p>Adatok betöltése...</p>
                     ) : (
                         <table className='table table-striped'>

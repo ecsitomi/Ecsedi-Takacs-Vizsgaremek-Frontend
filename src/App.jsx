@@ -2,6 +2,7 @@ import './App.css'
 import "bootstrap/dist/css/bootstrap.css"
 import "bootstrap/dist/js/bootstrap.bundle"
 import 'animate.css';
+import { useState } from 'react'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Layout from './components/Layout'
 import LoginPage from './pages/LoginPage'
@@ -15,13 +16,13 @@ import { AuthProvider } from './context/AuthContext';
 //import { useState, useEffect } from 'react'
 
 function App() {
-  /*
+  //ők most azért kellenek mert a register page csak így tud átnavigálni a login page-re
   //token állapot ellenőrzése
   const  [token, setToken] = useState(null);
-
   const tokenFrissites = () => {
     setToken(localStorage.getItem('token'));
   }
+  /*
 
   useEffect(() => {
     tokenFrissites();
@@ -33,7 +34,7 @@ function App() {
       children: [
         { path: '/', element: <HomePage /> },
         { path: 'login', element: <LoginPage /> },
-        { path: 'register', element: <RegisterPage /> },
+        { path: 'register', element: <RegisterPage tokenFrissites={tokenFrissites}/> },
         { path: 'user', element: <UserPage /> },
         { path: 'all-tickets', element: <IndexAll /> },
         { path: 'all-users', element: <IndexAllUser /> }
@@ -42,17 +43,20 @@ function App() {
   
   return (
     //útválasztó megjelenítése AuthProvider komponenssel
+    //Register oldal külön van hozzáadva, mert ott a funkciók nem az authcontext szerint működnek
     <AuthProvider>
-      <RouterProvider router={router} />
+      <RouterProvider router={router} >
+        {/*<RegisterPage navigate={navigate} />*/}
+      </RouterProvider>
     </AuthProvider>
   );
 }
 
-/*
-LoginPage.propTypes = {
+RegisterPage.propTypes = {
   tokenFrissites: PropTypes.func.isRequired,
 };
-RegisterPage.propTypes = {
+/*
+LoginPage.propTypes = {
   tokenFrissites: PropTypes.func.isRequired,
 };
 UserPage.propTypes = {
