@@ -1,10 +1,11 @@
 import Navbar from './Navbar';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 //import PropTypes from 'prop-types';
 
 function Layout() {
+    const navigate = useNavigate();
     //van e token
     const authContext = useContext(AuthContext);
     const { authToken, logout } = authContext;
@@ -22,8 +23,12 @@ function Layout() {
         //Jobb
         navbarRight.push({ to: '/user', text: 'Saját profil' });
         navbarOthers.push(
-            <button className="nav-link" onClick={() => logout()}>Kijelentkezés</button>
-        );
+            <button className="nav-link" onClick={() => {
+                logout();
+                navigate('/login');
+            }}>
+                Kijelentkezés
+            </button>);
     } else { //ha nincs token akkor reg/log
         navbarRight.push({ to: '/register', text: 'Regisztráció' });
         navbarRight.push({ to: '/login', text: 'Bejelentkezés' });
