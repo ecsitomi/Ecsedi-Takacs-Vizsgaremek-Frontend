@@ -70,6 +70,8 @@ function AllTicket() {
                                             <h5 className='card-title'>{bejelentes.hibaMegnevezese}</h5>
                                             <p className='card-text'>{bejelentes.hibaLeirasa}</p>
                                             <p className='card-text'>{bejelentes.hibaHelye}</p>
+                                            <img class="card-img-top" src={`data:image/jpeg;base64,${bejelentes.hibaKepe}`} /> {/* base64ből beolvasott képek */}
+
                                         </div>
                                     </div>
                                 </div>
