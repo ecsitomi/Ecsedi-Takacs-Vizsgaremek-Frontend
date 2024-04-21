@@ -25,7 +25,7 @@ function Layout() {
         navbarOthers.push(
             <button className="nav-link" onClick={() => {
                 logout();
-                navigate('/login');
+                navigate('/login'); //navigate funkciót be kellett rakni, mert a logout nem navigál
             }}>
                 Kijelentkezés
             </button>);
