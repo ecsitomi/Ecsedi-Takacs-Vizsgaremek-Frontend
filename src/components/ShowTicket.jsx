@@ -8,12 +8,20 @@ import DeleteTicketButton from '../components/DeleteTicket';
 
 function ShowTicket() {
     //const { id } = props; //bejelentés azonosítója
-    const { id } = useParams();
+    //const { id } = useParams();
+    //ellenőrzi az id változását, így ha kézzel átírjuk a linket, akkor is betölti az adatokat
+    const [id, setId] = useState(null);
+    const { id: routeId } = useParams();
+    useEffect(() => {
+        setId(routeId);
+    }, [routeId]);
+
     const authContext = useContext(AuthContext);
     const { authToken, user } = authContext;
     const apiUrl = "http://localhost:8000/api/hibak/" + id; //adott bejelentés lekérdezése
     const [bejelentes, setBejelentes] = useState(null); //bejelentés állapotának létrehozása
     const navigate = useNavigate();
+
 
     const loadBejelentes = async () => {
         if (authToken === null) {
@@ -46,9 +54,10 @@ function ShowTicket() {
     };
 
     useEffect(() => {
+        
         loadBejelentes();
         //tokenFrissites();
-    }, [id]); //id változásakor frissítse az oldalt - nemigazán működik :(
+    }, [id]); //id változásakor frissítse az oldalt
 
     // Háttérszín classzok definiálása a különböző hiba állapotokhoz
     const getBackgroundColor = (hibaAllapota) => {
