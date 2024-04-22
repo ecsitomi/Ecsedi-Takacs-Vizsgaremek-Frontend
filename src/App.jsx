@@ -16,6 +16,7 @@ import { AuthProvider } from './context/AuthContext';
 import CreateTicketPage from './pages/CreateTicketPage';
 import ShowTicket from './components/ShowTicket';
 import { useParams } from 'react-router-dom';
+import Kuka from './pages/Kuka';
 //import { useState, useEffect } from 'react'
 
 function App() {
@@ -43,7 +44,8 @@ function App() {
         { path: 'all-tickets', element: <IndexAll /> },
         { path: 'all-users', element: <IndexAllUser /> },
         { path: 'create-ticket', element: <CreateTicketPage /> },
-        { path: "show-ticket/:id", element: <ShowTicket />}
+        { path: "show-ticket/:id", element: <ShowTicket />},
+        { path: "kuka", element: <Kuka />}
         
       ]},
   ]);

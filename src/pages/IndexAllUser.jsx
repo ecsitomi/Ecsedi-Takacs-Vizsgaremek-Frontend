@@ -58,6 +58,8 @@ function AllUsers() {
                                     <th>ID</th>
                                     <th>Név</th>
                                     <th>Email</th>
+                                    <th>Rang</th>
+                                    <th>Műveletek</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -66,6 +68,7 @@ function AllUsers() {
                                         <td>{felhasznalo.id}</td>
                                         <td>{felhasznalo.name}</td>
                                         <td>{felhasznalo.email}</td>
+                                        <td>{felhasznalo.adminE}</td>
                                     </tr>
                                 ))}
                             </tbody>

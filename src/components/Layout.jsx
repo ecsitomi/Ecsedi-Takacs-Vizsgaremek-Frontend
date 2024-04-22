@@ -20,6 +20,7 @@ function Layout() {
         navbarLeft.push({ to: '/all-tickets', text: 'Összes bejelentés' });
         navbarLeft.push({ to: '/all-users', text: 'Összes felhasználó' });
         navbarLeft.push({ to: '/create-ticket', text: 'Bejelentés küldése' });
+        navbarLeft.push({ to: '/kuka', text: 'Lomtár' });
         //Jobb
         navbarRight.push({ to: '/user', text: 'Saját profil' });
         navbarOthers.push(
