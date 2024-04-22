@@ -9,7 +9,7 @@ export const AuthContext = createContext();
 export function AuthProvider(props) { //ami appban authprivider kontextusba van rakva, arra érvényer
     const apiUrl = "http://localhost:8000/api";
     const { children } = props; //lehetséges gyerek komponensek
-    const [authToken, setAuthToken] = useState(null); //authToken állapotának létrehozása
+    const [authToken, setAuthToken] = useState(undefined); //authToken állapotának létrehozása
     const [user, setUser] = useState(null); //user állapotának létrehozása
     const [error, setError] = useState(null); //hibaüzenet létrehozása
 

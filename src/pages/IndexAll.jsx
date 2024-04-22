@@ -1,7 +1,9 @@
 import '../App.css';
 import React, { useState, useEffect, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
+import DeleteTicketButton from '../components/DeleteTicket';
+//import ShowTicket from '../components/ShowTicket';
 //import PropTypes from 'prop-types';
 
 function AllTicket() {
@@ -14,8 +16,11 @@ function AllTicket() {
 
     const loadBejelentesek = async () => {
         //const token = localStorage.getItem("token");
-        if (!authToken) {
+        if (authToken === null) {
             navigate("/login");
+            return;
+        } 
+        if (authToken === undefined) {
             return;
         }
 
@@ -40,9 +45,10 @@ function AllTicket() {
     };
 
     useEffect(() => {
+        
         loadBejelentesek();
         //tokenFrissites();
-    }, []);
+    }, [authToken]);
 
     // Háttérszín classzok definiálása a különböző hiba állapotokhoz
     const getBackgroundColor = (hibaAllapota) => {
@@ -54,13 +60,13 @@ function AllTicket() {
             default: return '';
         }
     };
-    
+
     return (
         <div>
             {bejelentesek ? (
                 <>
                     <h2>Összes Bejelentés</h2>
-                    {bejelentesek.length === 0 ? (
+                    {bejelentesek.length == 0 ? (
                         <p>Adatok betöltése...</p>
                     ) : (
                         <div className='row'>
@@ -68,11 +74,19 @@ function AllTicket() {
                                 <div className='col-md-4' key={bejelentes.id}>
                                     <div className={`card mt-3 mb-4 ${getBackgroundColor(bejelentes.hibaAllapota)}`}>
                                         <div className='card-body'>
-                                            <h5 className='card-title'>{bejelentes.hibaMegnevezese}</h5>
-                                            <p className='card-text'>{bejelentes.hibaLeirasa}</p>
+                                            <h5 className='card-title'>{bejelentes.id}. {bejelentes.hibaMegnevezese}</h5>
+                                            {/*<p className='card-text'>{bejelentes.hibaLeirasa}</p>*/}
                                             <p className='card-text'>{bejelentes.hibaHelye}</p>
                                             <img class="card-img-top" src={`data:image/jpeg;base64,${bejelentes.hibaKepe}`} /> {/* base64ből beolvasott képek */}
-
+                                        </div>
+                                        <div className="card-footer">
+                                            <div className="d-grid gap-1">
+                                            { /*
+                                                <Link className="btn btn-info" to={"/show-ticket/" + bejelentes.id}>Módosítás</Link>
+                                                 <button className="btn btn-danger" onClick={() => handleDelete(bejelentes.id)}>Törlés</button> */ }
+                                                <DeleteTicketButton id={bejelentes.id} onDelete={loadBejelentesek} />
+                                                <Link className="btn btn-info" to={`/show-ticket/${bejelentes.id}`}>Bővebben</Link>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -82,7 +96,7 @@ function AllTicket() {
                 </>
             ) : <p>Betöltés...</p>}
         </div>
-    );    
+    );
 };
 
 /*

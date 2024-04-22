@@ -14,6 +14,7 @@ import IndexAll from './pages/IndexAll'
 import IndexAllUser from './pages/IndexAllUser'
 import { AuthProvider } from './context/AuthContext';
 import CreateTicketPage from './pages/CreateTicketPage';
+import ShowTicket from './components/ShowTicket';
 //import { useState, useEffect } from 'react'
 
 function App() {
@@ -41,6 +42,8 @@ function App() {
         { path: 'all-tickets', element: <IndexAll /> },
         { path: 'all-users', element: <IndexAllUser /> },
         { path: 'create-ticket', element: <CreateTicketPage /> },
+        { path: "/show-ticket/:id", element: <ShowTicket />}
+        
       ]},
   ]);
   
