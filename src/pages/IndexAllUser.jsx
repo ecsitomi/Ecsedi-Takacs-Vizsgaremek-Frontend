@@ -43,6 +43,14 @@ function AllUsers() {
         loadFelhasznalok();
         //tokenFrissites();
     }, []);
+
+    function bootstrapClass(felhasznalo) { //nagyon csúnyán jelenik meg
+        if (felhasznalo.adminE === "admin") {
+            return <span className="badge badge-pill badge-primary">admin</span>;
+        } else {
+            return <span className="badge badge-pill badge-info">felhasználó</span>;
+        }
+    }
     
     return (
         <div>
@@ -68,7 +76,9 @@ function AllUsers() {
                                         <td>{felhasznalo.id}</td>
                                         <td>{felhasznalo.name}</td>
                                         <td>{felhasznalo.email}</td>
+                                        {/*<td>{bootstrapClass(felhasznalo)}</td>*/}
                                         <td>{felhasznalo.adminE}</td>
+                                        <td>Hamarosan....</td>
                                     </tr>
                                 ))}
                             </tbody>

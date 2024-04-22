@@ -48,7 +48,7 @@ function ShowTicket() {
     useEffect(() => {
         loadBejelentes();
         //tokenFrissites();
-    }, [id]); //id változásakor frissítse az oldalt - megtörténik, csak nagyon lassan :(
+    }, [id]); //id változásakor frissítse az oldalt - nemigazán működik :(
 
     // Háttérszín classzok definiálása a különböző hiba állapotokhoz
     const getBackgroundColor = (hibaAllapota) => {
