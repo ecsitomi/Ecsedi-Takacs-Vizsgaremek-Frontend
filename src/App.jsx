@@ -15,6 +15,7 @@ import IndexAllUser from './pages/IndexAllUser'
 import { AuthProvider } from './context/AuthContext';
 import CreateTicketPage from './pages/CreateTicketPage';
 import ShowTicket from './components/ShowTicket';
+import { useParams } from 'react-router-dom';
 //import { useState, useEffect } from 'react'
 
 function App() {
@@ -42,7 +43,7 @@ function App() {
         { path: 'all-tickets', element: <IndexAll /> },
         { path: 'all-users', element: <IndexAllUser /> },
         { path: 'create-ticket', element: <CreateTicketPage /> },
-        { path: "/show-ticket/:id", element: <ShowTicket />}
+        { path: "show-ticket/:id", element: <ShowTicket />}
         
       ]},
   ]);
@@ -61,6 +62,11 @@ function App() {
 RegisterPage.propTypes = {
   tokenFrissites: PropTypes.func.isRequired,
 };
+
+ShowTicket.propTypes = {
+  id: PropTypes.string,
+};
+
 /*
 LoginPage.propTypes = {
   tokenFrissites: PropTypes.func.isRequired,

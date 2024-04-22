@@ -19,7 +19,7 @@ function AllTicket() {
         if (authToken === null) {
             navigate("/login");
             return;
-        } 
+        }
         if (authToken === undefined) {
             return;
         }
@@ -45,7 +45,7 @@ function AllTicket() {
     };
 
     useEffect(() => {
-        
+
         loadBejelentesek();
         //tokenFrissites();
     }, [authToken]);
@@ -65,7 +65,9 @@ function AllTicket() {
         <div>
             {bejelentesek ? (
                 <>
-                    <h2>Összes Bejelentés</h2>
+                    <h1>Összes Bejelentés</h1>
+                    <h6>Háttérszínek jelentése</h6>
+                    <p align="center"><span style={{ color: 'orange' }}><b>Sárga:</b></span> bejelentés alatt, <span style={{ color: 'blue' }}><b>Kék:</b></span> folyamatban, <span style={{ color: 'green' }}><b>Zöld:</b></span> kész, <span style={{ color: 'red' }}><b>Piros:</b></span> elutasítva</p>
                     {bejelentesek.length == 0 ? (
                         <p>Adatok betöltése...</p>
                     ) : (
@@ -73,19 +75,22 @@ function AllTicket() {
                             {bejelentesek.map((bejelentes) => (
                                 <div className='col-md-4' key={bejelentes.id}>
                                     <div className={`card mt-3 mb-4 ${getBackgroundColor(bejelentes.hibaAllapota)}`}>
-                                        <div className='card-body'>
+                                            <img class="card-img-top" src={`data:image/jpeg;base64,${bejelentes.hibaKepe}`} /> {/* base64ből beolvasott képek */}
+                                        <div className={`card-header `}>
                                             <h5 className='card-title'>{bejelentes.id}. {bejelentes.hibaMegnevezese}</h5>
+
+                                        </div>
+                                        <div className='card-body'>
                                             {/*<p className='card-text'>{bejelentes.hibaLeirasa}</p>*/}
                                             <p className='card-text'>{bejelentes.hibaHelye}</p>
-                                            <img class="card-img-top" src={`data:image/jpeg;base64,${bejelentes.hibaKepe}`} /> {/* base64ből beolvasott képek */}
                                         </div>
                                         <div className="card-footer">
                                             <div className="d-grid gap-1">
-                                            { /*
+                                                { /*
                                                 <Link className="btn btn-info" to={"/show-ticket/" + bejelentes.id}>Módosítás</Link>
                                                  <button className="btn btn-danger" onClick={() => handleDelete(bejelentes.id)}>Törlés</button> */ }
-                                                <DeleteTicketButton id={bejelentes.id} onDelete={loadBejelentesek} />
                                                 <Link className="btn btn-info" to={`/show-ticket/${bejelentes.id}`}>Bővebben</Link>
+                                                <DeleteTicketButton id={bejelentes.id} onDelete={loadBejelentesek} />
                                             </div>
                                         </div>
                                     </div>
