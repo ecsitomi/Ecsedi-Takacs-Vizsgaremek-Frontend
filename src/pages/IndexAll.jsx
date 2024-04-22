@@ -50,6 +50,7 @@ function AllTicket() {
             case 'bejelentés alatt': return 'bg-warning';
             case 'folyamatban': return 'bg-primary';
             case 'kész': return 'bg-success';
+            case 'elutasítva': return 'bg-danger';
             default: return '';
         }
     };

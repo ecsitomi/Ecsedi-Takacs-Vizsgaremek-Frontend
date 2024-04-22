@@ -12,7 +12,7 @@ function CreateTicketPage() {
     const hibaMegnevezeseRef = useRef(null);
     const hibaLeirasaRef = useRef(null);
     const hibaHelyeRef = useRef(null);
-    const hibaKepeRef = useRef(null);
+    const hibaKepeLinkRef = useRef(null);
 
     //nem elérhető az oldal ha nem vagy bejelentkezve
     useEffect(() => {
@@ -29,22 +29,41 @@ function CreateTicketPage() {
         const hibaMegnevezese = hibaMegnevezeseRef.current.value;
         const hibaLeirasa = hibaLeirasaRef.current.value;
         const hibaHelye = hibaHelyeRef.current.value;
-        const hibaKepe = hibaKepeRef.current.value;
+        const hibaKepeLink = hibaKepeLinkRef.current.files[0];
         const user_id = user.id;
 
         //létrehozás funkcóió meghívása
-        createTicket(hibaMegnevezese, hibaLeirasa, hibaHelye, hibaKepe, user_id);
+        createTicket(hibaMegnevezese, hibaLeirasa, hibaHelye, hibaKepeLink, user_id);
     };
 
     //új bejelentés létrehozása
-    const createTicket = async (hibaMegnevezese, hibaLeirasa, hibaHelye, hibaKepe, user_id) => {
+    const createTicket = async (hibaMegnevezese, hibaLeirasa, hibaHelye, hibaKepeLink, user_id) => {
         const url = apiUrl + "/store";
+
+        const formData = new FormData();
+        formData.append("hibaMegnevezese", hibaMegnevezese);
+        formData.append("hibaLeirasa", hibaLeirasa);
+        formData.append("hibaHelye", hibaHelye);
+        formData.append("hibaKepeLink", hibaKepeLink);
+        formData.append("user_id", user_id);
+
+        const response = await fetch(url, {
+            method: "POST",
+            body: formData,
+            headers: {
+                Accept: "application/json",
+                Authorization: "Bearer " + authToken,
+            },
+        });
+
+
+        /* HA JSON FORMÁTUMBA KELL KÜLDENI
         const ticketDTO = { //referenciák értékei változóba került korábban, most ezeket a változókat gyűjtjük össze és adjuk át "JSON" formátumban
             //referenciák
             hibaMegnevezese: hibaMegnevezese,
             hibaLeirasa: hibaLeirasa,
             hibaHelye: hibaHelye,
-            hibaKepe: hibaKepe,
+            hibaKepeLink: hibaKepeLink,
             user_id: user_id,
         };
         console.log(ticketDTO);
@@ -57,7 +76,8 @@ function CreateTicketPage() {
                 "Content-Type": "application/json",
                 Authorization: "Bearer " + authToken,
             },
-        }); //ha sikeres a válasz
+            */
+         //ha sikeres a válasz
         if (response.ok) {
             alert("Sikeres felvétel");
             clearForm(); //tisztitsa ki a formot
@@ -73,7 +93,7 @@ function CreateTicketPage() {
         hibaMegnevezeseRef.current.value = "";
         hibaLeirasaRef.current.value = "";
         hibaHelyeRef.current.value = "";
-        hibaKepeRef.current.value = "";
+        hibaKepeLinkRef.current.value = "";
     };
 
     //megjelenítése
@@ -92,9 +112,9 @@ function CreateTicketPage() {
                 <label htmlFor="hibaHelye" className="form-label">Hiba Helye*</label>
                 <input className="form-control" type="text" id="hibaHelye" ref={hibaHelyeRef} required />
             </div>
-            <div className="mb-3"> {/* KÉPFELTÖLTÉS - Ezt még át kell írni!! */}
-                <label htmlFor="hibaKepe" className="form-label">Hiba Képe</label>
-                <input className="form-control" type="text" id="hibaKepe" ref={hibaKepeRef} />
+            <div className="mb-3">
+                <label htmlFor="hibaKepeLink" className="form-label">Hiba Képe</label>
+                <input type="file" id="hibaKepeLink" ref={hibaKepeLinkRef} className="form-control" accept="image/*" />
             </div>
             <div className="d-grid">
                 <button type="submit" className="btn btn-primary">Elküldés</button>
