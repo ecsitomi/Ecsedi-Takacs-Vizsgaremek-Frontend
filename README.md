@@ -39,11 +39,11 @@ Mobil: [https://github.com/TakiLaci96/2024-takacs-ecsedi-vizsgaremek-mobil](http
 
 ## Fejlesztési dokumentáció
 
--
+- [https://github.com/ecsitomi/Ecsedi-Takacs-Vizsgaremek-Frontend/blob/main/ecsedi-takacs-frontend-fejlesztesi.docx](https://github.com/ecsitomi/Ecsedi-Takacs-Vizsgaremek-Frontend/blob/main/ecsedi-takacs-frontend-fejlesztesi.docx)
 
 ## Teszt esetek dokumentáció
 
--
+- [https://github.com/ecsitomi/Ecsedi-Takacs-Vizsgaremek-Frontend/blob/main/ecsedi-takacs-frontend-teszt.docx](https://github.com/ecsitomi/Ecsedi-Takacs-Vizsgaremek-Frontend/blob/main/ecsedi-takacs-frontend-teszt.docx)
 
 ## Készítette
 
