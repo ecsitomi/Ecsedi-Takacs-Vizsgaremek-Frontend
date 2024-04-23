@@ -1,8 +1,51 @@
-# React + Vite
+# Hibabeküldő alkalmazás frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Backend: [https://github.com/TakiLaci96/Ecsedi-Takacs-Backend](https://github.com/TakiLaci96/Ecsedi-Takacs-Backend)
+Mobil: [https://github.com/TakiLaci96/2024-takacs-ecsedi-vizsgaremek-mobil](https://github.com/TakiLaci96/2024-takacs-ecsedi-vizsgaremek-mobil)
 
-Currently, two official plugins are available:
+## Funkciók
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Regisztráció / Bejelentkezés
+- Felhasználói profil megtekintés / a felhasználó bejelentéseinek listázása
+- Összes bejelentés listázása
+- Egy adott bejelentés megtekintése / törlése / szerkesztése
+- Új bejelentés beküldése
+- Törölt bejelentések megtekintése
+- Összes felhasználó listázása
+
+## Követelmények
+
+- NodeJS 18.18.1
+- Vite 5.2
+- VSCode (a kód futtatásához)
+- Xampp (a MySQL adatbázis futtatásához)
+- Hibabeküldő alkalmazás backend egyidejű futtatása
+- A .env fájl a backendben kerül létrehozásra
+
+## Telepítés lépései
+
+- Csomagok telepítése
+  
+  ```sh
+  npm install
+  ```
+  Telepítésre kerülnek: React 18.2 (+DOM, +Router-DOM), Bootstrap 5.3.3, Animate.css 4.1.1, stb
+
+- Futtatás (local)
+  
+  ```sh
+  npm run dev
+  ```
+
+## Fejlesztési dokumentáció
+
+-
+
+## Teszt esetek dokumentáció
+
+-
+
+## Készítette
+
+Ecsedi Tamás, Takács László, 
+Leadva: 2024. április 23.
