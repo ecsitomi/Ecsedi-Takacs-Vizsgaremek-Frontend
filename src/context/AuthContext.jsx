@@ -54,6 +54,7 @@ export function AuthProvider(props) { //ami appban authprivider kontextusba van 
         authToken: authToken,
         user: user,
         error: error,
+        //adminE: user ? user.adminE : null, NEM SIKERÜLT BEFEJEZNI
 
         //utakon mi történjen, user oldalról hoztuk át a funkciókat
         login: async (email, password) => {

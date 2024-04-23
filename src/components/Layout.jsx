@@ -8,7 +8,7 @@ function Layout() {
     const navigate = useNavigate();
     //van e token
     const authContext = useContext(AuthContext);
-    const { authToken, logout } = authContext;
+    const { authToken, logout } = authContext; //user, adminE kimarad
     //navbar elemek tömbösítve
     const navbarLeft = [];
     const navbarRight = [];
@@ -16,11 +16,13 @@ function Layout() {
 
     navbarLeft.push({ to: '/', text: 'Főoldal' }); //főoldal mindig van
     if (authToken) { //token függvényében
-        //Bal
+        //if (adminE === "admin") { NEM SIKERÜLT BEFEJEZNI
+        //}
         navbarLeft.push({ to: '/all-tickets', text: 'Összes bejelentés' });
         navbarLeft.push({ to: '/all-users', text: 'Összes felhasználó' });
-        navbarLeft.push({ to: '/create-ticket', text: 'Bejelentés küldése' });
         navbarLeft.push({ to: '/kuka', text: 'Lomtár' });
+        //Bal
+        navbarLeft.push({ to: '/create-ticket', text: 'Bejelentés küldése' });
         //Jobb
         navbarRight.push({ to: '/user', text: 'Saját profil' });
         navbarOthers.push(
@@ -37,7 +39,7 @@ function Layout() {
 
     return ( //megjelenítés
         <div>
-            <Navbar  leftSide={navbarLeft} rightSide={navbarRight} others={navbarOthers} logout={logout}/>
+            <Navbar leftSide={navbarLeft} rightSide={navbarRight} others={navbarOthers} logout={logout} />
             <main className='container mt-2'>
                 <Outlet />
             </main>
