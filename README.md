@@ -1,6 +1,7 @@
 # Hibabeküldő alkalmazás frontend
 
 Backend: [https://github.com/TakiLaci96/Ecsedi-Takacs-Backend](https://github.com/TakiLaci96/Ecsedi-Takacs-Backend)
+
 Mobil: [https://github.com/TakiLaci96/2024-takacs-ecsedi-vizsgaremek-mobil](https://github.com/TakiLaci96/2024-takacs-ecsedi-vizsgaremek-mobil)
 
 ## Funkciók
